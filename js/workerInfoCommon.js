@@ -11,7 +11,7 @@ var workerCommon ={
 	workTypeList:[],//选择从业工种存放json
     mapApiPosition:function(id){
 		//创建地图map
-	    var html = $('<iframe id="mapPage" width="100%" height="100%" frameborder="0"  src="http://apis.map.qq.com/tools/locpicker?search=1&type=1&key=GOABZ-FLE33-DEG36-362YE-75EYJ-77B5Z&referer&referer=myapp"></iframe>').appendTo($(id));	
+	    var html = $('<iframe id="mapPage" width="100%" height="100%" frameborder="0"  src="https://apis.map.qq.com/tools/locpicker?search=1&type=1&key=GOABZ-FLE33-DEG36-362YE-75EYJ-77B5Z&referer&referer=myapp"></iframe>').appendTo($(id));	
 		   
 	    window.addEventListener('message', function(event) {
         // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
