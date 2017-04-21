@@ -5,17 +5,18 @@
 1.弹窗的调用方法：
      
 ` 
+```
+workerAddCard = new AddWorkerInfo(boxid,{
+showType: 2,  // //弹窗的方式（1.居中弹窗；2：右边向左边滑出；3：底部向上滑出; 4:全屏弹窗
+addClassNanme:"swipeLeft-block",
+selectType:true,
+selectBtn:"#sureBtn",
+endCallback: function(e){
+//回调函数
+}
+```
 
-> workerAddCard = new AddWorkerInfo(boxid,{
-> showType: 2,  // //弹窗的方式（1.居中弹窗；2：右边向左边滑出；3：底部向上滑出; 4:全屏弹窗
-> addClassNanme:"swipeLeft-block",
-> selectType:true,
-> selectBtn:"#sureBtn",
-> endCallback: function(e){
-> //回调函数
-> }
 
-`
 2.form表单js验证
 
 `validate = new validate();`
