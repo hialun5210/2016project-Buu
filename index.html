@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="telephone=no" name="format-detection">
+<link rel="stylesheet" href="reset.css" type="text/css"  />
+<link rel="stylesheet" href="index.css" type="text/css" />
+<link rel="stylesheet" href="select.css" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/iosSelect.js"></script>
+<script type="text/javascript" src="js/valiDateForm.js"></script>
+
+
+<script>
+var deviceWidth = Math.min(750, window.innerWidth)
+document.documentElement.style.fontSize = deviceWidth / 7.5 + "px";
+</script>
+</head>
+<body class="bgf7f5f5">
+
+<div class="rg_box borderccc " >
+<div class="rg_box_li padd15 clearfix">
+<label>上传头像</label>
+<img src="upImageBg.png" class="upload_user_img" />
+</div>
+</div>
+
+
+<div class="rg_box " >
+<div class="rg_box_li   pdlf125 ">
+<label>真实姓名</label>
+<input type="text" class="common_text"  placeholder="请填写真实姓名" id="realName" tip="真实姓名" />
+</div>
+<div class="rg_box_li   pdlf125  bordercccTop">
+<label>手机号码</label>
+<input type="tel" maxlength="11" id="phone" class="common_text"  placeholder="请填写手机号码" reg="number" tip="手机号码"/>
+</div>
+<div class="rg_box_li  pdlf125  bordercccTop pdrt25">
+<label>验 证 码</label>
+<input type="text" class="common_text"  placeholder="请输入验证码"  /><input type="button" value="发送验证码" class="sendcode" @click="findPhoneNo">
+</div>
+<div class="rg_box_li  bordercccTop pdlf125">
+<label>所在地区</label>
+<div class="display_requeryBox rg_arrow ellipsis" id="select_AreaInfo"></div>
+<input type="hidden" id="Select_province_name"  />
+<input type="hidden" id="Select_city_name" />
+<input type="hidden" id="Select_district_name"  tip="所在地区" />
+</div>
+<div class="rg_box_li  pdlf125 bordercccTop mulitlime ">
+<label>街道地址</label>
+<textarea class="double_common_text" style="width:100%;" placeholder="请输入详细地址" id="addressInput"  tip="街道地址" /></textarea>
+</div>
+<div class="rg_box_li  bordercccTop pdlf125">
+<label>选取坐标</label>
+<div class="display_requeryBox rg_arrow ellipsis" id="selectCoor"></div>
+<input type="hidden" id="mapvalue" tip="选取坐标" />
+</div>
+</div>
+
+
+<div class="rg_box " >
+<div class="rg_box_li  pdlf125">
+<label>身份证号</label>
+<input type="text" class="common_text"  placeholder="请填写真实身份证号" tip="身份证号" id="IDnumber" reg="number"/>
+</div>
+<div class="rg_box_li padd15 clearfix bordercccTop">
+<label>身份证实拍正反面</label>
+<img src="upImageBg.png" class="upload_user_img" />
+<img src="upImageBg.png" class="upload_user_img" />
+</div>
+</div>
+
+
+<div class="rg_box " >
+<div class="rg_box_li  pdlf128 ">
+<label>请选择接单区域</label>
+<div class="display_requeryBox rg_arrow ellipsis" id="select_AerList" @click="areaListAjax($event)">请选择接单区域</div>
+<input type="hidden" id="select_AerList_input" tip="接单区域" />
+</div>
+</div>
+
+<div class="rg_box " >
+<div class="rg_box_li  pdlf128 ">
+<label>请选择从业工种</label>
+<div class="display_requeryBox rg_arrow ellipsis" id="select_WorktypeList" @click="workTypelistshow($event)">请选择从业工种</div>
+<input type="hidden" id="worktypeInput" tip="从业工种"/>
+</div>
+</div>
+
+
+<div class="rg_box " >
+<div class="rg_box_li  pdlf128 ">
+<label>注册时间</label>
+<div class="display_requeryBox rg_arrow ellipsis" id="select_time" @click="showagreementBox('selectdate')">请选择注册时间</div>
+<input type="hidden" id="sourcetyep" tip="注册来源"/>
+</div>
+</div>
+
+
+
+<!-- 选择时间 -->
+<div class="Useragreement" id="selectdate">
+<header class="bar bar-nav" style="position:fixed !important;top:0px;">
+<h1 class="title">选择时间</h1>
+<a class="icon  pull-left hide-cln hashico" id="sureBtn">取消</a>
+<a class="cld-title-year pull-right icon hashico" @click="suretoInput">确认</a>
+</header>
+<div id="datehtml" style="overflow:auto; margin-top:44px;position:relative;height:100%"></div>
+<div id="dateTimesBox">
+   <a href="javascript:void(0)" data-id="09" show="block" >09:00-11:00</a>
+   <a href="javascript:void(0)" data-id="11" show="block">11:00-13:00</a>
+   <a href="javascript:void(0)" data-id="13" show="block">13:00-15:00</a>
+   <a href="javascript:void(0)" data-id="15" show="block">15:00-17:00</a>
+   <a href="javascript:void(0)" data-id="17" show="block">17:00-19:00</a>
+   <a href="javascript:void(0)" data-id="19" show="block">19:00-21:00</a>
+</div>
+<input type="hidden" value="" id="dateTImes" />
+<input type="hidden" value="" id="timeHours" />
+</div>
+
+
+<div class="user_agreement mgbt12rem">
+        <input class="check_choose " v-bind:class="{'checked':checkbox}" v-model="checkbox" type="checkbox" v-on:click="alocked()" >
+        <span>我已阅读并同意</span>
+        <a href="javascript:void(0)" @click="showagreementBox('fwxy')">《用户使用协议》</a>
+</div>
+
+
+
+<div class="Useragreement" id="fwxy">
+<header class="bar bar-nav">
+<h1 class="title">服务合作协议</h1>
+<a class="icon  pull-left hide-cln hashico" id="sureBtn">取消</a>
+<a class="cld-title-year pull-right icon hashico">确认</a>
+</header>
+<div>
+
+用户注册协议
+
+</div>
+</div>
+
+
+<div class="fixed_btn bgcolorgray rg_floatBtn"><input type="button" class="sub_btn" value="提交资料" id="submit_btn" /></div>
+
+
+<!--地图弹窗-->
+<div class="requrey_box hide" id="mapBox"></div>
+
+<!--接单区域选择-->
+<div id="select_AreaListBox" class="swipeLeft leftPopup" style="z-index:999">
+        <div class="ap overflow-col" >
+            <div class="tt-small "><span>选择接单区域</span>  <a href="javascript:void(0)" class="sure_Btn" id="sureBtn">确定</a> </div>
+            <ul class="wd_100">
+            <li><a href="javascript:void(0)" data-value="1">罗湖</a></li>
+            <li><a href="javascript:void(0)" data-value="2">宝安</a></li>
+            <li><a href="javascript:void(0)" data-value="3">南山</a></li>
+            <li><a href="javascript:void(0)" data-value="4">福田</a></li>
+            <li><a href="javascript:void(0)" data-value="5">龙岗</a></li>
+            </ul>
+        </div>  
+</div>
+
+
+<!--从业工种选择-->
+<div id="select_WorkTypeListBox" class="swipeLeft leftPopup" style="z-index:999" >
+        <div class="ap overflow-col" >
+            <div class="tt-small "><span>选择从业工种</span>  <a href="javascript:void(0)" class="sure_Btn" id="sureBtn">确定</a> </div>
+            <ul class="wd_100">
+            <li><a href="javascript:void(0)" data-value="1">木工</a></li>
+            <li><a href="javascript:void(0)" data-value="2">水电工</a></li>
+            <li><a href="javascript:void(0)" data-value="3">油漆工</a></li>
+            <li><a href="javascript:void(0)" data-value="4">泥工</a></li>
+            </ul>
+        </div>  
+</div>
+
+</body>
+<script type="text/javascript" src="js/workDialog.js"></script>
+<script type="text/javascript" src="js/workerInfoCommon.js"></script>
+<script type="text/javascript" src="http://zhoushengfe.com/iosselect/demo/three/areaData_v2.js"></script>
+<script type="text/javascript" src="js/vue.js" ></script>
+<script type="text/javascript">     
+
+validate = new validate();
+var realName = $("#realName");
+var districtname = $("#Select_district_name");
+var addressInput = $("#addressInput");
+var selectCoor = $("#mapvalue");
+var IDnumber =$("#IDnumber");
+var AerListinput =$("#select_AerList_input");
+var worktypeInput =$("#worktypeInput");
+var phone = $("#phone");
+
+
+$("#submit_btn").on("click",function(){
+   if(validate.name(realName)&&validate.isValEmpty(districtname)&&validate.isValEmpty(addressInput)&&validate.isValEmpty(selectCoor)&&validate.idCard(IDnumber)&&      validate.isValEmpty(AerListinput)&&validate.isValEmpty(worktypeInput)){ 
+   }
+	
+})
+</script>
+
+
+<script type="text/javascript">
+
+$(function(){
+var app =  new Vue({
+	el:"body",
+	data:{
+		postUrl:"${pageContext.request.contextPath}/workerPortalJson/",
+		areaLists:[],
+		cityId:"",    //城市id
+		cityname:"",  //城市名字
+		areaList:"",  //接单区域
+		checkbox:false,
+		url:window.location.href,
+		dateTime:"",
+		timeHours:""
+	},
+	created:function(){
+			workerCommon.select_Address();
+	},
+	methods:{
+		areaListAjax:function(e){
+			
+			this.cityId=$("#Select_city_name").attr('data-id');
+			this.areaList=$("#select_AerList_input").val();
+			
+			if(!this.cityId){
+				validate.showTip("请先选择所在地区");
+				return;
+			}
+			else if(this.areaList)
+			{   
+				this.arealistshow(e); return;
+				
+			}
+			else{
+			//
+//			    $.ajax({
+//                  type: "POST",
+//                  url: this.postUrl+"searchWorkerAreaList.action",
+//                  data:{cityid:"202"},
+//                  success: function (data){
+//                	  if (data.length) {
+//                		  this.areaLists=data;
+                		  this.arealistshow(e);
+                	//  }
+//                  }.bind(this)
+//		        })
+
+		   }  
+			
+	   }, 
+	   arealistshow:function(a){ //弹窗选择区域
+		   workerCommon.areaListSelectShow(a,"#select_AreaListBox",workerCommon.areaList,"#select_AerList_input");
+		   
+	   },
+	   workTypelistshow:function(e){//弹窗选择工人
+		   workerCommon.areaListSelectShow(e,"#select_WorkTypeListBox",workerCommon.workTypeList,"#worktypeInput");
+	   },
+	   alocked: function () {
+            this.checkbox = !this.checkbox;
+			console.log(this.checkbox);
+       },
+	   suretoInput:function(){ //确认选择时间
+			this.dateTime = document.getElementById("dateTImes").value;
+			this.timeHours = document.getElementById("timeHours").value;
+			document.getElementById("select_time").innerHTML = this.dateTime + " " + this.timeHours;
+			workerAddCard._hide();
+			window.location.hash = "";
+		 },
+	   showagreementBox:function(a){
+		    workerCommon.goBackUrlShow(a);   
+	   },
+	    loops:function(e){  //验证码倒计时
+		   var num = 60,clock = null;
+			  clock = setInterval(loop,1000);
+			  function loop(){
+			   if(num > 0) {
+	               num--;
+	               e.target.value = num +'后重试';
+	               /* e.target.style.backgroundColor='#FFF'; */
+	               e.target.disabled = true;
+	           } else {
+	               clearInterval(clock);
+	               e.target.value = '获取验证码';
+	               /* e.target.style.backgroundColor='#FFF'; */
+	               e.target.disabled = false;
+	               num = 60;
+	           }
+			  }
+		   },
+		   findPhoneNo:function(e){ //发送验证码
+		   var _this = this;
+		   if(validate.isPhone(phone)){
+			    this.loops(e);
+		   }
+		 
+	       }//end
+	}
+  })
+})
+</script>
+
+<script type="text/javascript" src="js/calendar.js"></script>
+<script type="text/javascript" src="js/dateInit.js"></script>
+<link rel="stylesheet" href="calendar2017.css" type="text/css" />
+</html>
