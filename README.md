@@ -4,6 +4,8 @@
 
 预览地址：https://hialun5210.github.io/2016project-Buu/
 
+ <img src="https://github.com/hialun5210/2016project-Buu/blob/master/demo.png?raw=true" style="margin-left:30px" />
+
 1.弹窗的调用方法：
      
 ` 
