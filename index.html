@@ -23,7 +23,7 @@ document.documentElement.style.fontSize = deviceWidth / 7.5 + "px";
 <div class="rg_box borderccc " >
 <div class="rg_box_li padd15 clearfix">
 <label>上传头像</label>
-<img src="upImageBg.png" class="upload_user_img" />
+<img src="upImageBg.png" class="img-list  upload_user_img" alt="我的头像"/>
 </div>
 </div>
 
@@ -67,8 +67,8 @@ document.documentElement.style.fontSize = deviceWidth / 7.5 + "px";
 </div>
 <div class="rg_box_li padd15 clearfix bordercccTop">
 <label>身份证实拍正反面</label>
-<img src="upImageBg.png" class="upload_user_img" />
-<img src="upImageBg.png" class="upload_user_img" />
+<img src="upImageBg.png" class="img-list upload_user_img" alt="身份证反面照" />
+<img src="upImageBg.png" class="img-list upload_user_img" alt="身份证正面照"/>
 </div>
 </div>
 
@@ -181,6 +181,7 @@ document.documentElement.style.fontSize = deviceWidth / 7.5 + "px";
 <script type="text/javascript" src="js/workDialog.js"></script>
 <script type="text/javascript" src="js/workerInfoCommon.js"></script>
 <script type="text/javascript" src="js/cityJson.js"></script>
+<script type="text/javascript" src="js/imageViewer.min.js"></script>
 <script type="text/javascript" src="js/vue.js" ></script>
 <script type="text/javascript">     
 
@@ -221,6 +222,7 @@ var app =  new Vue({
 	},
 	created:function(){
 			workerCommon.select_Address();
+			imageViewerOpition({className:".img-list"});//图片预览
 	},
 	methods:{
 		areaListAjax:function(e){

@@ -450,3 +450,58 @@ leftPopup.swipeLeft {
     transform: rotate(45deg) translateY(-65%);
     right: 0;
 }
+
+/*-预览图片-*/
+#close {
+            font-size: 16px;
+            z-index: 999999;
+            width: 45px;
+            height: 45px;
+            top: 0;
+            right: 0;
+            opacity: .8;
+            position: absolute;
+            background:#333;
+            border-radius: 0 0 0 80%;
+        }
+#close:before,  #close:after {
+  	content: " ";
+    width: 2px;
+    height: 20px;
+    background-color: hsl(0, 100%, 100%);
+    position: absolute;
+    top: 10px;
+    left: 24px;
+}
+#close:before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+#close:after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.image-footer {
+            text-align: center;
+            font-size: 16px !important;
+            bottom: 20px !important;
+        }
+.imgName{
+              
+              font-size: 17px;
+              text-align:center;
+              display: block;
+              color:#fff;
+              margin:10px auto;
+             
+
+        }
+.image-viewer{position: fixed !important; bottom: 0;}
+.image-viewer .viewer{ position: absolute; transform: translateY(-50%); }
