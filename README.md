@@ -39,4 +39,13 @@ validate.isEmail 代表验证邮箱格式
 //tip=“手机号不能为空”    代表文本框验证不通过所提示的信息
 ```
 
+3.图片预览
 
+```  
+imageViewerOpition({className:".img-list"});
+```
+.img-list  可以自己定义样式设置，设置后将会以此样式为单位相册预览
+```
+
+4.日历
+5.select仿ios，滑动多选
